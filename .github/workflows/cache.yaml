@@ -1,15 +1,22 @@
-name: Cache Demo
+name: CI with Cache
+
 on: [push]
+
 jobs:
-  demo:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v4
-    - run: npm ci
-    - name: prime-cache-9a69e51
-      id: cache
-      uses: actions/cache@v4
-      with:
-        key: cache-9a69e51
-        path: node_modules
-    - run: echo Cache hit: ${{ steps.cache.outputs.cache-hit }}
+      - uses: actions/checkout@v4
+
+      - name: Cache dependencies
+        id: cache-9a69e51
+        uses: actions/cache@v4
+        with:
+          path: cache-folder
+          key: cache-9a69e51
+
+      - name: prime-cache-9a69e51
+        run: echo "Cache hit? -> ${{ steps.cache-9a69e51.outputs.cache-hit }}"
+
+      - run: mkdir -p cache-folder

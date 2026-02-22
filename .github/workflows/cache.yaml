@@ -8,18 +8,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Cache dependencies
-        id: cache
+        id: cache-9a69e51
         uses: actions/cache@v4
         with:
           path: cache-folder
           key: cache-9a69e51
 
       - name: prime-cache-9a69e51
-        run: echo ${{ steps.cache.outputs.cache-hit }}
+        run: echo "Cache hit? -> ${{ steps.cache-9a69e51.outputs.cache-hit }}"
 
       - name: Create folder
         run: mkdir -p cache-folder

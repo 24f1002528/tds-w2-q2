@@ -1,6 +1,8 @@
 name: Hello World Action  # Name shown in GitHub UI
 
-on: [push]  # Triggers on any push to the repo
+on:
+  push:             # Triggers on any push to the repo
+  workflow_dispatch: # Allows manual trigger from GitHub Actions UI
 
 jobs:
   test:
@@ -9,5 +11,5 @@ jobs:
       - name: Checkout code  # Step 1: Grabs your repo files
         uses: actions/checkout@v4  # Reusable GitHub Action
 
-      - name: 24f1002528@ds.study.iitm.ac.in  # Your required step (change nothing here)
+      - name: 24f1002528@ds.study.iitm.ac.in  # Your required step
         run: echo "Hello from my GitHub Action! This ran on $(date)."  # Simple bash command

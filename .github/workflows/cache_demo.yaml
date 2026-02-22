@@ -4,7 +4,7 @@ on: [push]
 jobs:
   demo:
     runs-on: ubuntu-latest
-    steps:
+    steps:                    # ← Must be 2 spaces under 'demo:'
     - name: Checkout code
       uses: actions/checkout@v4
     - name: Install deps first

@@ -1,22 +1,25 @@
 name: CI with Cache
 
-on: [push]
+on:
+  push:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Cache dependencies
-        id: cache-9a69e51
+        id: cache
         uses: actions/cache@v4
         with:
           path: cache-folder
           key: cache-9a69e51
 
       - name: prime-cache-9a69e51
-        run: echo "Cache hit? -> ${{ steps.cache-9a69e51.outputs.cache-hit }}"
+        run: echo ${{ steps.cache.outputs.cache-hit }}
 
-      - run: mkdir -p cache-folder
+      - name: Create folder
+        run: mkdir -p cache-folder

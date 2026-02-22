@@ -13,20 +13,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - name: Cache dependencies
+      - name: Cache something simple
         id: cache-deps
         uses: actions/cache@v4
         with:
-          path: ~/.npm
+          path: cache-folder
           key: cache-9a69e51
 
       - name: prime-cache-9a69e51
         run: echo "Cache hit? -> ${{ steps.cache-deps.outputs.cache-hit }}"
 
-      - name: Install dependencies
-        run: npm install
+      - name: Create folder if missing
+        run: mkdir -p cache-folder

@@ -1,19 +1,15 @@
 name: Cache Demo
 on: [push]
-
 jobs:
   demo:
     runs-on: ubuntu-latest
-    steps:                    # ← Must be 2 spaces under 'demo:'
-    - name: Checkout code
-      uses: actions/checkout@v4
-    - name: Install deps first
-      run: npm ci
+    steps:
+    - uses: actions/checkout@v4
+    - run: npm ci
     - name: prime-cache-9a69e51
-      id: cache-step
+      id: cache
       uses: actions/cache@v4
       with:
         key: cache-9a69e51
         path: node_modules
-    - name: Show cache result
-      run: echo "Cache result: ${{ steps.cache-step.outputs.cache-hit }}"
+    - run: echo Cache hit: ${{ steps.cache.outputs.cache-hit }}

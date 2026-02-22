@@ -1,25 +1,19 @@
 name: Cache Demo
-
-on: [push]  # Triggers on any push
+on: [push]
 
 jobs:
   demo:
     runs-on: ubuntu-latest
-    
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-      
-    - name: prime-cache-9a69e51 # Your required step name
+    - name: Install deps first
+      run: npm ci
+    - name: prime-cache-9a69e51
       id: cache-step
-      uses: actions/cache@v4  # Required version (or newer)
+      uses: actions/cache@v4
       with:
-        key: cache-9a69e51  # Exact fixed key required
-        path: node_modules  # Cache this folder (change for your deps)
-        
+        key: cache-9a69e51
+        path: node_modules
     - name: Show cache result
       run: echo "Cache result: ${{ steps.cache-step.outputs.cache-hit }}"
-      
-    - name: Install deps (for demo)
-      if: steps.cache-step.outputs.cache-hit != 'true'
-      run: npm install  # Or pip install -r requirements.txt
